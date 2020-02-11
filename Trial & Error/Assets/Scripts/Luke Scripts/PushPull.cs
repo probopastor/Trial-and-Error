@@ -10,13 +10,16 @@ public class PushPull : MonoBehaviour
     public LayerMask wallLayer;
     public LayerMask objectLayer;
 
+    public Rigidbody rb;
 
-    public float speed = 1.0f;
+    public float speed = 60.0f;
+
+    Transform target;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -24,23 +27,31 @@ public class PushPull : MonoBehaviour
     {
         RaycastHit hit;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
+
+        if (Input.GetMouseButton(0))
         {
-            // show reticle that wall layer 
-           
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //    {
-        //         Transform target;
-        //         // Move our position a step closer to the target.
-        //        float step = speed * Time.deltaTime; // calculate distance to move
-        //        //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
+            {
+                // show reticle that wall layer 
 
-        //    }
+                target = hit.transform;
+                //Debug.Log(transform.position);
+                // Move our position a step closer to the target.
 
+                //transform.position = target.position;
+                //target = null;
+                //transform.position = target.position;
+
+                if (target != null)
+                {
+                    float step = speed * Time.deltaTime; // calculate distance to move
+                    transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+                    //rb.AddForce();
+                }
+
+            }
 
         }
-
 
 
 
