@@ -7,8 +7,9 @@ public class PushPull : MonoBehaviour
     public bool isWalls;
     public bool isObjects;
 
-    public int wallLayer = 1;
-    public int objectLayer = 2;
+    public LayerMask wallLayer;
+    public LayerMask objectLayer;
+
 
     public float speed = 1.0f;
 
@@ -24,18 +25,18 @@ public class PushPull : MonoBehaviour
         RaycastHit hit;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     
-        if (Physics.Raycast(ray, out hit, wallLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
         {
             // show reticle that wall layer 
            
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                 Transform target;
-                 // Move our position a step closer to the target.
-                float step = speed * Time.deltaTime; // calculate distance to move
-                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //    {
+        //         Transform target;
+        //         // Move our position a step closer to the target.
+        //        float step = speed * Time.deltaTime; // calculate distance to move
+        //        //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
 
-            }
+        //    }
 
 
         }
