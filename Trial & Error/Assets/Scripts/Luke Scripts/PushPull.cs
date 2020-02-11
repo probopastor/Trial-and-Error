@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PushPull : MonoBehaviour
 {
+    public bool isWalls;
+    public bool isObjects;
+
+    public int wallLayer = 1;
+    public int objectLayer = 2;
+
+    public float speed = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +21,50 @@ public class PushPull : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit hit;
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    
+        if (Physics.Raycast(ray, out hit, wallLayer))
+        {
+            // show reticle that wall layer 
+           
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                 Transform target;
+                 // Move our position a step closer to the target.
+                float step = speed * Time.deltaTime; // calculate distance to move
+                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+        /////TRY THIS OUT LATER
+        //RaycastHit hit;
+
+        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, wallLayer))
+        //{
+        //    // show reticle that wall layer 
+
+        //   if(Input.GetKeyDown(KeyCode.Mouse0))
+        //    {
+        //        //grab object
+        //    }
+        //}
+        /////////////////////////////////////////////////
+
+
+
+
+
+
         /*
          * reticle creates raycast to determine if object can be interacted with
          * if the reticle hits set a bool to true to indicate the player can interact
