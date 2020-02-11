@@ -691,7 +691,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4
   rb: {fileID: 0}
-  speed: 1
+  speed: 600
 --- !u!1001 &533033339
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,15 +28,15 @@ public class PushPull : MonoBehaviour
         RaycastHit hit;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
             {
                 Debug.Log(hit.transform.position);
                 // show reticle that wall layer 
                 //Vector3 direction = hit.transform.position - transform.position;
-               
-                rb.AddForce(hit.transform.position * speed, ForceMode.Impulse);
+
+                rb.AddForce(ray.direction * speed);
             }
 
         }
