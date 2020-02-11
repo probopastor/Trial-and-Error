@@ -32,23 +32,10 @@ public class PushPull : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
             {
+                Debug.Log(hit.transform.position);
                 // show reticle that wall layer 
-
-                target = hit.transform;
-                //Debug.Log(transform.position);
-                // Move our position a step closer to the target.
-
-                //transform.position = target.position;
-                //target = null;
-                //transform.position = target.position;
-
-                if (target != null)
-                {
-                    float step = speed * Time.deltaTime; // calculate distance to move
-                    transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-                    //rb.AddForce();
-                }
-
+                Vector3 direction = hit.transform.position - transform.position;
+                rb.AddForce(direction * speed, ForceMode.Impulse);
             }
 
         }
