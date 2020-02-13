@@ -31,6 +31,9 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Luke Scripts" t="Include">
+            <e p="PushPull.cs" t="Include" />
+          </e>
           <e p="PlayerMovement.cs" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">

@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 

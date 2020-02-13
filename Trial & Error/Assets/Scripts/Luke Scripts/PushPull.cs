@@ -10,7 +10,7 @@ public class PushPull : MonoBehaviour
     public LayerMask wallLayer;
     public LayerMask objectLayer;
 
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     public float pullSpeed = 60.0f;
     public float pushSpeed = 60f;
