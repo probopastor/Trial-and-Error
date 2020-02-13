@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    private CinemachineVirtualCamera _playerVirtualCamera;
+    private Transform _mainCameraRotation;
 
     [SerializeField, Tooltip("Max speed the player can move at")]
     private float maxPlayerSpeed = 8f;
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _playerVirtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+        _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
         Cursor.visible = false;
     }
 
@@ -28,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        var velocity = _rigidbody.velocity;
-        //TODO _movementDir *= pvc cinemachine transform forward 
-        velocity += new Vector3(_movementDir.x, 0f, _movementDir.y);
+        Vector3 velocity = _rigidbody.velocity;
+        var camRot = _mainCameraRotation.rotation;
+        camRot.eulerAngles = new Vector3(0, camRot.eulerAngles.y, 0);
+        velocity += camRot * new Vector3(_movementDir.x, 0, _movementDir.y);
         velocity = Vector3.ClampMagnitude(velocity, maxPlayerSpeed);
         _rigidbody.velocity = velocity;
     }
