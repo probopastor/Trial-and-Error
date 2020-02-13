@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private Transform _mainCameraRotation;
 
+    public bool unlocked = false;
+    
     [SerializeField, Tooltip("Max speed the player can move at")]
     private float maxPlayerSpeed = 8f;
     private Vector2 _movementDir = Vector2.zero;
@@ -33,7 +35,10 @@ public class PlayerMovement : MonoBehaviour
         var camRot = _mainCameraRotation.rotation;
         camRot.eulerAngles = new Vector3(0, camRot.eulerAngles.y, 0);
         velocity += camRot * new Vector3(_movementDir.x, 0, _movementDir.y);
-        velocity = Vector3.ClampMagnitude(velocity, maxPlayerSpeed);
+        if (!unlocked)
+        {
+            velocity = Vector3.ClampMagnitude(velocity, maxPlayerSpeed);
+        }
         _rigidbody.velocity = velocity;
     }
 

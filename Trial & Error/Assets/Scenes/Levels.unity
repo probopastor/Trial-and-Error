@@ -16764,6 +16764,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 199827193426895158, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
+        type: 3}
+      propertyPath: unlocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8324367450795651655, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
         type: 3}
       propertyPath: m_Name
@@ -16826,35 +16831,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bd5a69a6146e9d498ef02c2e0cccfac, type: 3}
---- !u!1 &1687639713 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8324367450795651655, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
-    type: 3}
-  m_PrefabInstance: {fileID: 1687639712}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1687639714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687639713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ee91c0047193745afdadb57147f572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWalls: 0
-  isObjects: 0
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 2
-  objectLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  pullSpeed: 600
-  pushSpeed: 600
-  magnetizedObject: {fileID: 0}
 --- !u!4 &1687639719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8324367450795651704, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
