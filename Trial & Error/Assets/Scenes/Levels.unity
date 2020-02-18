@@ -4348,11 +4348,6 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1687639719}
-    - target: {fileID: 4111259878148594985, guid: 2ed02d1123db65f4686e4cbb5b522eb3,
-        type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 4111259878148594990, guid: 2ed02d1123db65f4686e4cbb5b522eb3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17943,15 +17938,6 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 946659766}
-    - target: {fileID: 1687639714, guid: 4bd5a69a6146e9d498ef02c2e0cccfac, type: 3}
-      propertyPath: _pullCamFOV
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 199827193426895158, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
-        type: 3}
-      propertyPath: unlocked
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8324367450795651655, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
         type: 3}
       propertyPath: m_Name
