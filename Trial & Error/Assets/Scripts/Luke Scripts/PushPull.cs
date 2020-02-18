@@ -21,6 +21,11 @@ public class PushPull : MonoBehaviour
     Transform target;
 
     [SerializeField]
+    private float pullMaxDistance = 10f;
+    [SerializeField]
+    private float pushMaxDistance = 5f;
+
+    [SerializeField]
     private CinemachineVirtualCamera playerCam;
     private float _startCamFOV = 60;
     [SerializeField]
@@ -45,7 +50,7 @@ public class PushPull : MonoBehaviour
         //push/pull mechanic
         if (Input.GetMouseButton(0))
         {
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
+            if (Physics.Raycast(ray, out hit, pullMaxDistance, wallLayer))
             {
                 rb.AddForce(ray.direction * pullSpeed);
                 if (playerCam.m_Lens.FieldOfView < _pullCamFOV)
@@ -68,7 +73,7 @@ public class PushPull : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             //shoots a raycast out at X and checks if it hits something on the wallLayer
-            if (Physics.Raycast(ray, out hit, 5f, wallLayer))
+            if (Physics.Raycast(ray, out hit, pushMaxDistance, wallLayer))
             {
                 //pushes the player in the opposite direction of the hit Raycast
                //rb.AddForceAtPosition(-ray.direction * pushSpeed, hit.point, ForceMode.Impulse);
