@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PushPull : MonoBehaviour
@@ -19,15 +20,25 @@ public class PushPull : MonoBehaviour
 
     Transform target;
 
+    [SerializeField]
+    private CinemachineVirtualCamera playerCam;
+    private float _startCamFOV = 60;
+    [SerializeField]
+    private float _pullCamFOV = 90;
+    [SerializeField]
+    private float _pushCamFOV = 90;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        playerCam.m_Lens.FieldOfView = _startCamFOV;
     }
 
    
     void Update()
     {
+
         RaycastHit hit;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -36,16 +47,23 @@ public class PushPull : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, wallLayer))
             {
-                Debug.Log(hit.transform.position);
-                
-               
-
                 rb.AddForce(ray.direction * pullSpeed);
+                if (playerCam.m_Lens.FieldOfView < _pullCamFOV)
+                {
+                    playerCam.m_Lens.FieldOfView += Time.deltaTime * 30f;
+                }
             }
-
+            else if (playerCam.m_Lens.FieldOfView > _startCamFOV)
+            {
+                playerCam.m_Lens.FieldOfView -= Time.deltaTime * 50f;
+            }
+        }
+        else if (playerCam.m_Lens.FieldOfView > _startCamFOV)
+        {
+            playerCam.m_Lens.FieldOfView -= Time.deltaTime * 50f;
         }
 
-        
+
         //push mechanic
         if (Input.GetMouseButtonDown(1))
         {
@@ -54,10 +72,9 @@ public class PushPull : MonoBehaviour
             {
                 //pushes the player in the opposite direction of the hit Raycast
                //rb.AddForceAtPosition(-ray.direction * pushSpeed, hit.point, ForceMode.Impulse);
-                 rb.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
-         
+               rb.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
+               playerCam.m_Lens.FieldOfView = _pushCamFOV;
             }
-
         }
 
         //USE THE CODE BELOW FOR THE MAGNETIZED MECHANIC (assigns the Raycasthit object to a variable)

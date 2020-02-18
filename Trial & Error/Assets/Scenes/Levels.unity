@@ -4348,6 +4348,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1687639719}
+    - target: {fileID: 4111259878148594985, guid: 2ed02d1123db65f4686e4cbb5b522eb3,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4111259878148594990, guid: 2ed02d1123db65f4686e4cbb5b522eb3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8150,6 +8155,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &946659766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4111259878148594985, guid: 2ed02d1123db65f4686e4cbb5b522eb3,
+    type: 3}
+  m_PrefabInstance: {fileID: 516509413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &971936407
 Mesh:
   m_ObjectHideFlags: 0
@@ -11547,7 +11564,7 @@ GameObject:
   - component: {fileID: 1262304907}
   - component: {fileID: 1262304906}
   - component: {fileID: 1262304905}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13623,6 +13640,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 594828495339651060, guid: 24c18754a15a84848a2692df18223e37,
+        type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 594828495339651061, guid: 24c18754a15a84848a2692df18223e37,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17917,6 +17939,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1687639714, guid: 4bd5a69a6146e9d498ef02c2e0cccfac, type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 946659766}
+    - target: {fileID: 1687639714, guid: 4bd5a69a6146e9d498ef02c2e0cccfac, type: 3}
+      propertyPath: _pullCamFOV
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 199827193426895158, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
         type: 3}
       propertyPath: unlocked
