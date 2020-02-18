@@ -17938,10 +17938,6 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 946659766}
-    - target: {fileID: 1687639714, guid: 4bd5a69a6146e9d498ef02c2e0cccfac, type: 3}
-      propertyPath: pullMaxDistance
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 8324367450795651655, guid: 4bd5a69a6146e9d498ef02c2e0cccfac,
         type: 3}
       propertyPath: m_Name

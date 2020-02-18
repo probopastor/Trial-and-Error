@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 1
   playerSpeed: 1
-  maxPlayerSpeed: 8
+  maxPlayerSpeed: 25
 --- !u!114 &1687639714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +212,8 @@ MonoBehaviour:
   pullSpeed: 600
   pushSpeed: 600
   magnetizedObject: {fileID: 0}
+  pullMaxDistance: 35
+  pushMaxDistance: 5
   playerCam: {fileID: 0}
   _pullCamFOV: 90
   _pushCamFOV: 90
