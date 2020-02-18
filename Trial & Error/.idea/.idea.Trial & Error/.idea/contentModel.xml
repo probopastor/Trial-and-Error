@@ -275,6 +275,14 @@
             </e>
           </e>
         </e>
+        <e p="UI" t="Include">
+          <e p="Buttons" t="Include">
+            <e p="_license.txt" t="Include" />
+          </e>
+          <e p="Controller Prompts" t="Include">
+            <e p="Readme.txt" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
