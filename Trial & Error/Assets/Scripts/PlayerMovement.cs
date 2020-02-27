@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Transform _mainCameraRotation;
-
+    private Vector3 startingPosition;
+    private int collectiblesCollected = 0;
     public bool unlocked = false;
 
     [SerializeField]
@@ -24,11 +25,13 @@ public class PlayerMovement : MonoBehaviour
         _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        startingPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
+        BackToStart();
     }
 
     void MovePlayer()
@@ -47,5 +50,25 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementDir = context.performed ? context.ReadValue<Vector2>() : Vector2.zero;
+    }
+
+    void BackToStart()
+    {
+        if (Input.GetKey(KeyCode.Backspace))
+        {
+            gameObject.transform.position = startingPosition;
+        }
+    }
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Collectible")
+        {
+            collectiblesCollected++;
+            Debug.Log("Got it!");
+            GameObject collectionSphere = other.gameObject;
+            collectionSphere.SetActive(false);
+        }
     }
 }
