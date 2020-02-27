@@ -9,9 +9,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Transform _mainCameraRotation;
-    private Vector3 startingPosition;
-    private int collectiblesCollected = 0;
-    public bool unlocked = false;
 
     [SerializeField]
     private float playerSpeed = 1f;
@@ -25,13 +22,11 @@ public class PlayerMovement : MonoBehaviour
         _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        startingPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
-        BackToStart();
     }
 
     void MovePlayer()
@@ -39,36 +34,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocity = _rigidbody.velocity;
         var camRot = _mainCameraRotation.rotation;
         camRot.eulerAngles = new Vector3(0, camRot.eulerAngles.y, 0);
-        velocity += camRot * new Vector3(_movementDir.x, 0, _movementDir.y) * playerSpeed;
-        if (!unlocked)
-        {
-            velocity = Vector3.ClampMagnitude(velocity, maxPlayerSpeed);
-        }
+        velocity += camRot * Vector3.ClampMagnitude(new Vector3(_movementDir.x, 0, _movementDir.y) * playerSpeed, maxPlayerSpeed);
+        velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
         _rigidbody.velocity = velocity;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementDir = context.performed ? context.ReadValue<Vector2>() : Vector2.zero;
-    }
-
-    void BackToStart()
-    {
-        if (Input.GetKey(KeyCode.Backspace))
-        {
-            gameObject.transform.position = startingPosition;
-        }
-    }
-    
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Collectible")
-        {
-            collectiblesCollected++;
-            Debug.Log("Got it!");
-            GameObject collectionSphere = other.gameObject;
-            collectionSphere.SetActive(false);
-        }
     }
 }

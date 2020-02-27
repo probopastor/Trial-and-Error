@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PushPull : MonoBehaviour
 {
-    public bool isWalls;
-    public bool isObjects;
-
     public LayerMask wallLayer;
-    public LayerMask objectLayer;
 
-    private Rigidbody rb;
-
-    public float pullSpeed = 60.0f;
+    private Rigidbody _rigidbody;
+    private Collider _collider;
+    private Camera _camera;
+    
+    [SerializeField]
+    private GameObject pullPos;
+    public float pullSpeed = 60f;
     public float pushSpeed = 60f;
-
-    public GameObject magnetizedObject;
-
-    Transform target;
 
     [SerializeField]
     private float pullMaxDistance = 10f;
@@ -29,31 +26,46 @@ public class PushPull : MonoBehaviour
     private CinemachineVirtualCamera playerCam;
     private float _startCamFOV = 60;
     [SerializeField]
-    private float _pullCamFOV = 90;
+    private float pullCamFov = 90;
     [SerializeField]
-    private float _pushCamFOV = 90;
+    private float pushCamFov = 90;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _collider = GetComponent<Collider>();
+        _camera = Camera.main;
         playerCam.m_Lens.FieldOfView = _startCamFOV;
     }
 
    
     void Update()
     {
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //push/pull mechanic
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, pullMaxDistance, wallLayer))
+            {
+                pullPos.transform.position = hit.point;
+                pullPos.transform.parent = hit.transform;
+            }
+            else
+            {
+                pullPos.transform.parent = transform;
+                pullPos.transform.position = transform.position;
+            }
+        }
+        
+        //pull mechanic
         if (Input.GetMouseButton(0))
         {
-            if (Physics.Raycast(ray, out hit, pullMaxDistance, wallLayer))
+            if (pullPos.transform.parent != transform && Physics.Raycast(ray, out RaycastHit hit, pullMaxDistance, wallLayer))
             {
-                rb.AddForce(ray.direction * pullSpeed);
-                if (playerCam.m_Lens.FieldOfView < _pullCamFOV)
+                _rigidbody.position = Vector3.Lerp(_rigidbody.position, pullPos.transform.position, Time.deltaTime * pullSpeed);
+                
+                if (playerCam.m_Lens.FieldOfView < pullCamFov)
                 {
                     playerCam.m_Lens.FieldOfView += Time.deltaTime * 30f;
                 }
@@ -73,16 +85,12 @@ public class PushPull : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             //shoots a raycast out at X and checks if it hits something on the wallLayer
-            if (Physics.Raycast(ray, out hit, pushMaxDistance, wallLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, pushMaxDistance, wallLayer))
             {
                 //pushes the player in the opposite direction of the hit Raycast
-               //rb.AddForceAtPosition(-ray.direction * pushSpeed, hit.point, ForceMode.Impulse);
-               rb.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
-               playerCam.m_Lens.FieldOfView = _pushCamFOV;
+               _rigidbody.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
+               playerCam.m_Lens.FieldOfView = pushCamFov;
             }
         }
-
-        //USE THE CODE BELOW FOR THE MAGNETIZED MECHANIC (assigns the Raycasthit object to a variable)
-        //magnetizedObject = hit.collider.gameObject;
     }
 }

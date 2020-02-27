@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1350390052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1350390053}
+  m_Layer: 0
+  m_Name: PullPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350390053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350390052}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8324367450795651704}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8324367450795651655
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,7 @@ GameObject:
   - component: {fileID: 8324367450795651704}
   - component: {fileID: 8324367450795651705}
   - component: {fileID: 8324367450795651654}
-  - component: {fileID: 126488799}
+  - component: {fileID: 39497848986285095}
   - component: {fileID: 199827193426895158}
   - component: {fileID: 1687639714}
   m_Layer: 0
@@ -31,7 +61,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1350390053}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,7 +96,7 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &126488799
+--- !u!114 &39497848986285095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,24 +138,9 @@ MonoBehaviour:
     m_ActionId: a193eff5-abd5-4646-8639-8c29f6f1e693
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 199827193426895158}
-        m_MethodName: OnLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5507fd3d-fbd9-4323-86e4-9e9bb1a0f00e
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 3957474c-f2b7-4c46-b9bf-9c69043cdd3b
-    m_ActionName: Player/Fire[/Mouse/leftButton]
+    m_ActionId: 330e4d42-4e55-4a82-8e2a-78e9f08b2b86
+    m_ActionName: Player/Look[/Mouse/position]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 36f36f8c-55b1-4319-8930-f4f6b97a9d79
@@ -186,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f58aef8d73d5746987b1acdf931fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 1
   playerSpeed: 1
   maxPlayerSpeed: 25
 --- !u!114 &1687639714
@@ -201,19 +216,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ee91c0047193745afdadb57147f572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWalls: 0
-  isObjects: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 2
-  objectLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  pullPos: {fileID: 1350390052}
   pullSpeed: 600
   pushSpeed: 600
-  magnetizedObject: {fileID: 0}
   pullMaxDistance: 35
   pushMaxDistance: 5
   playerCam: {fileID: 0}
-  _pullCamFOV: 90
-  _pushCamFOV: 90
+  pullCamFov: 90
+  pushCamFov: 90
