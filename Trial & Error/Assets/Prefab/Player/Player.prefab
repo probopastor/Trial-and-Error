@@ -204,6 +204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 1
   maxPlayerSpeed: 25
+  sphereText: {fileID: 0}
+  startingPosition: {fileID: 0}
 --- !u!114 &1687639714
 MonoBehaviour:
   m_ObjectHideFlags: 0

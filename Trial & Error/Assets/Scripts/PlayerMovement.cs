@@ -18,7 +18,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movementDir = Vector2.zero;
     private int collectiblesCollected = 0;
     public TextMeshProUGUI sphereText;
-    
+    [SerializeField, Tooltip("The position the player starts at, and will teleport back to")]
+    private Vector3 startingPosition;
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -26,6 +28,12 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         sphereText.text = "Collected Spheres: " + collectiblesCollected;
+        startingPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        MoveToSpawn();
     }
 
     private void FixedUpdate()
@@ -58,5 +66,15 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementDir = context.performed ? context.ReadValue<Vector2>() : Vector2.zero;
+    }
+
+    private void MoveToSpawn()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            _rigidbody.isKinematic = true;
+            transform.position = startingPosition;
+            _rigidbody.isKinematic = false;
+        }
     }
 }
