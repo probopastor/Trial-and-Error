@@ -205,6 +205,7 @@ MonoBehaviour:
   playerSpeed: 1
   maxPlayerSpeed: 20
   sphereText: {fileID: 0}
+  startingPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1687639714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   pullPos: {fileID: 1350390052}
-  pullSpeed: 100
+  pullSpeed: 25
   pushSpeed: 600
   pullMaxDistance: 35
   pushMaxDistance: 5
