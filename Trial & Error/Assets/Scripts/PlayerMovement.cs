@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("Max speed the player can move at")]
     private float maxPlayerSpeed = 8f;
     private Vector2 _movementDir = Vector2.zero;
+    private int collectiblesCollected = 0;
+    public TextMeshProUGUI sphereText;
     
     private void Start()
     {
@@ -22,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        sphereText.text = "Collected Spheres: " + collectiblesCollected;
     }
 
     private void FixedUpdate()
@@ -37,6 +41,18 @@ public class PlayerMovement : MonoBehaviour
         velocity += camRot * Vector3.ClampMagnitude(new Vector3(_movementDir.x, 0, _movementDir.y) * playerSpeed, maxPlayerSpeed);
         velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
         _rigidbody.velocity = velocity;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Collectible")
+        {
+            Debug.Log("Got it!");
+            collectiblesCollected++;
+            other.gameObject.SetActive(false);
+            sphereText.text = "Collected Spheres: " + collectiblesCollected;
+
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
