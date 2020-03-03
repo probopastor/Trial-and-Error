@@ -203,7 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 1
-  maxPlayerSpeed: 25
+  maxPlayerSpeed: 20
+  sphereText: {fileID: 0}
 --- !u!114 &1687639714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   pullPos: {fileID: 1350390052}
-  pullSpeed: 600
+  pullSpeed: 100
   pushSpeed: 600
   pullMaxDistance: 35
   pushMaxDistance: 5

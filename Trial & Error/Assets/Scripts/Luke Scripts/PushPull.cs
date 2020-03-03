@@ -61,9 +61,12 @@ public class PushPull : MonoBehaviour
         //pull mechanic
         if (Input.GetMouseButton(0))
         {
-            if (pullPos.transform.parent != transform && Physics.Raycast(ray, out RaycastHit hit, pullMaxDistance, wallLayer))
+            if (pullPos.transform.parent != transform) //&& Physics.Raycast(ray, out RaycastHit hit, pullMaxDistance, wallLayer))
             {
-                _rigidbody.position = Vector3.Lerp(_rigidbody.position, pullPos.transform.position, Time.deltaTime * pullSpeed);
+                //_rigidbody.position = Vector3.Lerp(_rigidbody.position, pullPos.transform.position, Time.deltaTime * pullSpeed);
+
+                var forceDir = pullPos.transform.position - transform.position;
+                _rigidbody.AddForce(forceDir * pullSpeed, ForceMode.Force);
                 
                 if (playerCam.m_Lens.FieldOfView < pullCamFov)
                 {
