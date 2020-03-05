@@ -66,7 +66,7 @@ public class PushPull : MonoBehaviour
                 //_rigidbody.position = Vector3.Lerp(_rigidbody.position, pullPos.transform.position, Time.deltaTime * pullSpeed);
 
                 var forceDir = pullPos.transform.position - transform.position;
-                _rigidbody.AddForce(forceDir * pullSpeed, ForceMode.Force);
+                _rigidbody.AddForce(forceDir * pullSpeed, ForceMode.Acceleration);
                 
                 if (playerCam.m_Lens.FieldOfView < pullCamFov)
                 {
