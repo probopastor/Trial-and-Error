@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("Max speed the player can move at")]
     private float maxPlayerSpeed = 8f;
     private Vector2 _movementDir = Vector2.zero;
+    private bool inAir = false;
+    
     private int collectiblesCollected = 0;
     public TextMeshProUGUI sphereText;
     [SerializeField, Tooltip("The position the player starts at, and will teleport back to")]
@@ -53,13 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Collectible")
+        if (other.CompareTag("Collectible"))
         {
             Debug.Log("Got it!");
             collectiblesCollected++;
             other.gameObject.SetActive(false);
             sphereText.text = "Collected Spheres: " + collectiblesCollected;
-
         }
     }
 
