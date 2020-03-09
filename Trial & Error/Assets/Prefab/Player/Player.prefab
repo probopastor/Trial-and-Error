@@ -222,8 +222,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   pullPos: {fileID: 1350390052}
-  pullSpeed: 20
-  pushSpeed: 600
+  pullSpeed: 15
+  pushSpeed: 400
   pullMaxDistance: 25
   pushMaxDistance: 5
   playerCam: {fileID: 0}
