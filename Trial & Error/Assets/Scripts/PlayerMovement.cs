@@ -16,12 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("Max speed the player can move at")]
     private float maxPlayerSpeed = 8f;
     private Vector2 _movementDir = Vector2.zero;
-    private bool inAir = false;
+    private bool _inAir = false;
     
-    private int collectiblesCollected = 0;
+    private int _collectiblesCollected = 0;
     public TextMeshProUGUI sphereText;
-    [SerializeField, Tooltip("The position the player starts at, and will teleport back to")]
-    private Vector3 startingPosition;
+    private Vector3 _startingPosition;
 
     private void Start()
     {
@@ -29,8 +28,9 @@ public class PlayerMovement : MonoBehaviour
         _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        sphereText.text = "Collected Spheres: " + collectiblesCollected;
-        startingPosition = transform.position;
+        sphereText.text = "Collected Spheres: " + _collectiblesCollected;
+        _startingPosition = transform.position;
+        print(_startingPosition);
     }
 
     private void Update()
@@ -58,9 +58,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Collectible"))
         {
             Debug.Log("Got it!");
-            collectiblesCollected++;
+            _collectiblesCollected++;
             other.gameObject.SetActive(false);
-            sphereText.text = "Collected Spheres: " + collectiblesCollected;
+            sphereText.text = "Collected Spheres: " + _collectiblesCollected;
         }
     }
 
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             _rigidbody.isKinematic = true;
-            transform.position = startingPosition;
+            transform.position = _startingPosition;
             _rigidbody.isKinematic = false;
         }
     }
