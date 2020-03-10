@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField, Tooltip("Max speed the player can move at")]
     private float maxPlayerSpeed = 8f;
     private Vector2 _movementDir = Vector2.zero;
+    [SerializeField] private float jumpForce = 10;
     private bool _inAir = false;
     
     private int _collectiblesCollected = 0;
@@ -67,6 +68,14 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         _movementDir = context.performed ? context.ReadValue<Vector2>() : Vector2.zero;
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, 1f))
+        {
+            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
     private void MoveToSpawn()
