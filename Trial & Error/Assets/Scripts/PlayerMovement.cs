@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         sphereText.text = "Collected Spheres: " + _collectiblesCollected;
         _startingPosition = transform.position;
-        print(_startingPosition);
     }
 
     private void Update()
