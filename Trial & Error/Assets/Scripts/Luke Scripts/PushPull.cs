@@ -16,6 +16,10 @@ public class PushPull : MonoBehaviour
     private GameObject pullPos;
 
     private ParticleSystem pullParticle;
+    [SerializeField]
+    private float startPullParticleSpeed = 5;
+    [SerializeField]
+    private float pullingParticleSpeed = 50;
     public float pullSpeed = 60f;
     public float pushSpeed = 60f;
 
@@ -47,6 +51,7 @@ public class PushPull : MonoBehaviour
     {
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
+        var pullParticleMain = pullParticle.main;
         if (Physics.Raycast(ray, out RaycastHit particleHit, pullMaxDistance, wallLayer))
         {
             pullPos.transform.position = particleHit.point;
@@ -64,6 +69,7 @@ public class PushPull : MonoBehaviour
             {
                 pullPos.transform.position = pullHit.point;
                 pullPos.transform.parent = pullHit.transform;
+                pullParticleMain.startSpeed = pullingParticleSpeed;
             }
             else
             {
@@ -95,6 +101,11 @@ public class PushPull : MonoBehaviour
         else if (playerCam.m_Lens.FieldOfView > _startCamFOV)
         {
             playerCam.m_Lens.FieldOfView -= Time.deltaTime * 50f;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            pullParticleMain.startSpeed = startPullParticleSpeed;
         }
 
 
