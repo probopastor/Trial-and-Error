@@ -219,7 +219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 1
   maxPlayerSpeed: 20
-  jumpForce: 20
+  maxAirSpeed: 10
+  jumpForce: 30
   sphereText: {fileID: 0}
 --- !u!114 &1687639714
 MonoBehaviour:
