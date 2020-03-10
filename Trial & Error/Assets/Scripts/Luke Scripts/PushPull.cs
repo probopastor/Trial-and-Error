@@ -10,13 +10,11 @@ public class PushPull : MonoBehaviour
     public LayerMask wallLayer;
 
     private Rigidbody _rigidbody;
-    private Collider _collider;
     private Camera _camera;
     
     [SerializeField]
     private GameObject pullPos;
     public float pullSpeed = 60f;
-    private bool onWall = false;
     public float pushSpeed = 60f;
 
     [SerializeField]
@@ -36,7 +34,6 @@ public class PushPull : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<Collider>();
         _camera = Camera.main;
         playerCam.m_Lens.FieldOfView = _startCamFOV;
     }
@@ -89,37 +86,13 @@ public class PushPull : MonoBehaviour
         //push mechanic
         if (Input.GetMouseButtonDown(1))
         {
-            if (onWall)
+            //shoots a raycast out at X and checks if it hits something on the wallLayer
+            if (Physics.Raycast(ray, out RaycastHit hit, pushMaxDistance, wallLayer))
             {
-                var reverseRay = new Ray(ray.origin, -ray.direction);
-                //shoots a raycast out at X and checks if it hits something on the wallLayer
-                if (Physics.Raycast(reverseRay, out RaycastHit hit, pushMaxDistance, wallLayer))
-                {
-                    //pushes the player in the opposite direction of the hit Raycast
-                    _rigidbody.AddForce(ray.direction * pushSpeed, ForceMode.Impulse);
-                    playerCam.m_Lens.FieldOfView = pushCamFov;
-                }
-            }
-            else
-            {
-                //shoots a raycast out at X and checks if it hits something on the wallLayer
-                if (Physics.Raycast(ray, out RaycastHit hit, pushMaxDistance, wallLayer))
-                {
-                    //pushes the player in the opposite direction of the hit Raycast
-                    _rigidbody.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
-                    playerCam.m_Lens.FieldOfView = pushCamFov;
-                }
+                //pushes the player in the opposite direction of the hit Raycast
+                _rigidbody.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
+                playerCam.m_Lens.FieldOfView = pushCamFov;
             }
         }
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        onWall = true;
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        onWall = false;
     }
 }
