@@ -311,6 +311,9 @@
             <e p="Readme.txt" t="Include" />
           </e>
         </e>
+        <e p="WorldMaterialsFree" t="Include">
+          <e p="WorldMatFree.shader" t="Include" />
+        </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
