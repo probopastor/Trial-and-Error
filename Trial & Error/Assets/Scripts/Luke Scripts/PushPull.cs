@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PushPull : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class PushPull : MonoBehaviour
     
     [SerializeField]
     private GameObject pullPos;
-
+    
     [SerializeField]
     private GameObject pushParticle;
     private ParticleSystem _pullParticle;
@@ -22,6 +22,7 @@ public class PushPull : MonoBehaviour
     private float startPullParticleSpeed = 5;
     [SerializeField]
     private float pullingParticleSpeed = 50;
+    
     public float pullSpeed = 60f;
     public float pushSpeed = 60f;
 
@@ -29,6 +30,11 @@ public class PushPull : MonoBehaviour
     private float pullMaxDistance = 10f;
     [SerializeField]
     private float pushMaxDistance = 5f;
+
+    [SerializeField]
+    private Image crossHairUI;
+    [SerializeField]
+    private List<Sprite> crossHairSprites = new List<Sprite>();
 
     [SerializeField]
     private CinemachineVirtualCamera playerCam;
@@ -46,6 +52,7 @@ public class PushPull : MonoBehaviour
         playerCam.m_Lens.FieldOfView = _startCamFOV;
         _pullParticle = pullPos.GetComponentInChildren<ParticleSystem>();
         _pullParticle.Stop();
+        crossHairUI.sprite = crossHairSprites[0];
     }
 
    
@@ -72,6 +79,7 @@ public class PushPull : MonoBehaviour
                 pullPos.transform.position = pullHit.point;
                 pullPos.transform.parent = pullHit.transform;
                 pullParticleMain.startSpeed = pullingParticleSpeed;
+                crossHairUI.sprite = crossHairSprites[1];
             }
             else
             {
@@ -108,6 +116,7 @@ public class PushPull : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             pullParticleMain.startSpeed = startPullParticleSpeed;
+            crossHairUI.sprite = crossHairSprites[0];
         }
 
 
@@ -122,7 +131,13 @@ public class PushPull : MonoBehaviour
                 var newPushParticle = Instantiate(pushParticle, hit.point, Quaternion.identity);
                 newPushParticle.transform.LookAt(transform.position);
                 playerCam.m_Lens.FieldOfView = pushCamFov;
+                crossHairUI.sprite = crossHairSprites[2];
             }
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            crossHairUI.sprite = crossHairSprites[0];
         }
     }
 }

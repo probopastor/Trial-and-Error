@@ -5028,6 +5028,11 @@ MonoBehaviour:
   pushSpeed: 400
   pullMaxDistance: 25
   pushMaxDistance: 5
+  crossHairUI: {fileID: 0}
+  crossHairSprites:
+  - {fileID: 21300000, guid: 47a98877e99beae4397230b99edf9386, type: 3}
+  - {fileID: 21300000, guid: 186379cca255796459d99345abccfb8a, type: 3}
+  - {fileID: 21300000, guid: d4d6bd046fc3af44a96ad42afc77bae4, type: 3}
   playerCam: {fileID: 0}
   pullCamFov: 90
   pushCamFov: 90
