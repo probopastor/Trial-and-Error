@@ -15,7 +15,9 @@ public class PushPull : MonoBehaviour
     [SerializeField]
     private GameObject pullPos;
 
-    private ParticleSystem pullParticle;
+    [SerializeField]
+    private GameObject pushParticle;
+    private ParticleSystem _pullParticle;
     [SerializeField]
     private float startPullParticleSpeed = 5;
     [SerializeField]
@@ -42,8 +44,8 @@ public class PushPull : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _camera = Camera.main;
         playerCam.m_Lens.FieldOfView = _startCamFOV;
-        pullParticle = pullPos.GetComponentInChildren<ParticleSystem>();
-        pullParticle.Stop();
+        _pullParticle = pullPos.GetComponentInChildren<ParticleSystem>();
+        _pullParticle.Stop();
     }
 
    
@@ -51,16 +53,16 @@ public class PushPull : MonoBehaviour
     {
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        var pullParticleMain = pullParticle.main;
+        var pullParticleMain = _pullParticle.main;
         if (Physics.Raycast(ray, out RaycastHit particleHit, pullMaxDistance, wallLayer))
         {
             pullPos.transform.position = particleHit.point;
             pullPos.transform.LookAt(transform.position);
-            pullParticle.Play();
+            _pullParticle.Play();
         }
         else
         {
-            pullParticle.Stop();
+            _pullParticle.Stop();
         }
         
         if (Input.GetMouseButtonDown(0))
@@ -117,6 +119,8 @@ public class PushPull : MonoBehaviour
             {
                 //pushes the player in the opposite direction of the hit Raycast
                 _rigidbody.AddForce(-ray.direction * pushSpeed, ForceMode.Impulse);
+                var newPushParticle = Instantiate(pushParticle, hit.point, Quaternion.identity);
+                newPushParticle.transform.LookAt(transform.position);
                 playerCam.m_Lens.FieldOfView = pushCamFov;
             }
         }
