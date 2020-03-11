@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _inAir = false;
     
     private int _collectiblesCollected = 0;
+    private int _totalCollectibles;
     public TextMeshProUGUI sphereText;
     private Vector3 _startingPosition;
 
@@ -31,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
         _mainCameraRotation = FindObjectOfType<CinemachineBrain>().transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        sphereText.text = "Collected Spheres: " + _collectiblesCollected;
+        _totalCollectibles = GameObject.FindGameObjectsWithTag("Collectible").Length;
+        sphereText.text = "Collected Spheres: " + _collectiblesCollected + " / " + _totalCollectibles;
         _startingPosition = transform.position;
     }
 
@@ -79,10 +81,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Collectible"))
         {
-            Debug.Log("Got it!");
+            //Debug.Log("Got it!");
             _collectiblesCollected++;
-            other.gameObject.SetActive(false);
-            sphereText.text = "Collected Spheres: " + _collectiblesCollected;
+            Destroy(other.gameObject);
+            sphereText.text = "Collected Spheres: " + _collectiblesCollected + " / " + _totalCollectibles;
         }
     }
 
